@@ -3,6 +3,8 @@ const path = require("path");
 const {stat} = require("fs");
 const {tipo,servirFichero} = require(path.join(__dirname,"funciones.js"));
 
+let puerto = process.env.PORT || 3000;
+
 
 const servidor = http.createServer((peticion,respuesta) => {
     
@@ -25,6 +27,6 @@ const servidor = http.createServer((peticion,respuesta) => {
     
 });
 
-servidor.listen(3000);
+servidor.listen(puerto);
 
 
