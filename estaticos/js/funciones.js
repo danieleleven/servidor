@@ -5,10 +5,11 @@ const botonJugar = document.querySelector(".modal button");
 const modal = document.querySelector(".modal");
 let puntuacion = 0;
 let contador = null;
-let tiempo = 8;
-let estadoJuego = false; // true --> he ganado | false --> he perdido o es la primera partida
+let tiempo = 15;
+let estadoJuego = false; //true --> he ganado | false --> he perdido o es la primera partida
 
-function juego(tiempo){   // Esta es la parte referida al tiempo-contador
+
+function juego(tiempo){
     puntuacion = 0;
     contenedorTiempo.innerHTML = "";
     circulos.forEach(circulo => circulo.classList.remove("invisible"));
@@ -17,7 +18,6 @@ function juego(tiempo){   // Esta es la parte referida al tiempo-contador
         bloque.style.width = `calc(${100/tiempo}% - 10px)`;
         contenedorTiempo.appendChild(bloque);
     }
-
     contador = setInterval(() => {
         contenedorTiempo.children[0].remove();
         if(contenedorTiempo.children.length == 0){
@@ -26,30 +26,26 @@ function juego(tiempo){   // Esta es la parte referida al tiempo-contador
             textoModal.innerHTML = "has perdido";
             modal.classList.add("visible");
         }
-    },1000); 
+    }, 1000);
+
 }
 
-
-// Esta de abajo es la parte referida a los círculos y como funcionan haciendoles click y hasta cuando podemos jugar "12 clicks"
 
 for(let i = 0; i < circulos.length; i++){
     circulos[i].addEventListener("click", () => {
         circulos[i].classList.add("invisible");
         puntuacion++;
-        console.log(puntuacion);
         if(puntuacion == 12){
             clearInterval(contador);
             estadoJuego = true;
-            textoModal.innerHTML = "has ganado";
+            textoModal.innerHTML = "has ganado!";
             modal.classList.add("visible");
         }
-    });
+    });    
 }
-
 
 botonJugar.addEventListener("click", () => {
     modal.classList.remove("visible");
     juego(estadoJuego ? --tiempo : tiempo);
 });
-
 

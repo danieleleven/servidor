@@ -5,7 +5,7 @@ const {tipo,servirFichero} = require(path.join(__dirname,"funciones.js"));
 
 
 const servidor = http.createServer((peticion,respuesta) => {
-
+    
     if(peticion.url == "/"){
         servirFichero(respuesta,path.join(__dirname,"estaticos/index.html"),tipo("html"),200);
     }else{
@@ -20,12 +20,11 @@ const servidor = http.createServer((peticion,respuesta) => {
             }
 
         });
+
     }
     
 });
 
-servidor.listen(3000); 
-
-
+servidor.listen(3000);
 
 
